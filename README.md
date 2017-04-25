@@ -4,28 +4,103 @@
 
 ### A una máquina virtual de linux añadirle dos discos duros:
 
-disco A
+### Disco A
 
 ### Crear las siguientes particiones:
 
-Linux --> usamos el comando (fdisk /dev/sdb) (siendo sdb el primer disco) imagen -->Por defecto al crear la partición le da formato linux.
+Linux --> usamos el comando (fdisk /dev/sdb) (siendo sdb el primer disco) 
 
 ~~~
 partition type:
-  p  primary (0primary, 0 extended , 4 free)
+  p  primary (0 primary, 0 extended , 4 free)
   e extended
 Select (default p): p
 Partition number (1-4, default 1) :1
 First sector (2048-20971519, default 2048) :
 Using default value 2048
-Last sector, *
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519):1000000
+0
 
-disco B
+command (m for help): n 
+
+partition type:
+  p  primary (1 primary, 0 extended , 3 free)
+  e extended
+Select (default p): e
+Partition number (1-4, default 2) :2
+First sector (1000001-20971519, default 1000001) :
+Using default value 1000001
+Last sector, +sectors or +size{K,M,G} (10000001-20971519, default 20971519):
+Using default value 20971519
+
+command (m for help): w
+The partition table has been altered!
+
+Called ioctl() to re-read partition table.
+Syncing disks.
+
+
+~~~
+Por defecto al crear la partición le da formato linux.
+
+## Fat
+
+~~~
+root@ubuntu-sv:~# mkfs
+mkfs        mkfs.ext2     mkfs.ext4dev    mkfs.msdos
+mkfs.bef    mkfs.ext3     mkfs.fat        mkfs.ntfs
+mkfs.cramfs mkfs.ext4     mkfs.minix      mkfs.vfat
+root@ubuntu-sv:~# mkfs.fat /dev/
+Display all 211 possibilities? (y or n)
+root@ubuntu-sv:~# mkfs.fat /dev/sdb2
+mkfs.fat 3.0.26 (2014-03-07)
+mkfs.fa : Attempting to create a too large filesystem
+root@ubuntu-sv:~#
+~~~
+
+### Disco B
 
 Crear las siguientes particiones:
 
-Linux --> usamos el comando (fdisk /dev/sdc) (siendo sdc el segundo disco) imagen -->Por defecto al crear la partición le da formato linux.
+Linux --> usamos el comando (fdisk /dev/sdc) (siendo sdc el segundo disco) 
 
+~~~
+partition type:
+  p  primary (0 primary, 0 extended , 4 free)
+  e extended
+Select (default p): p
+Partition number (1-4, default 1) :1
+First sector (2048-20971519, default 2048) :
+Using default value 2048
+Last sector, +sectors or +size{K,M,G} (2048-20971519, default 20971519):7000000
+0
+
+command (m for help): n 
+
+partition type:
+  p  primary (1 primary, 0 extended , 3 free)
+  e extended
+Select (default p): e
+Partition number (1-4, default 2): 2
+First sector (7000001-20971519, default 7000001):
+Using default value 7000001
+Last sector, +sectors or +size{K,M,G} (70000001-20971519, default 20971519):
+Using default value 20971519
+
+command (m for help): n
+partition type:
+  p  primary (2 primary, 0 extended , 2 free)
+  e extended
+Select (default p): e
+Partition number (1-4, default 3):
+Using default value 3
+First sector (14000001-20971519, default 14000001):
+~~~
+
+
+Por defecto al crear la partición le da formato linux.
+
+~~~
 NTFS imagen -->Damosel formato con el comando de la imagen(mkfs.ntfs /dev/sdc2)
 
 Fat imagen -->Damosel formato con el comando de la imagen(mkfs.fat /dev/sdc3)
