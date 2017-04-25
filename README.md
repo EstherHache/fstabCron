@@ -101,7 +101,17 @@ First sector (14000001-20971519, default 14000001):
 Por defecto al crear la partición le da formato linux.
 
 ~~~
-NTFS imagen -->Damosel formato con el comando de la imagen(mkfs.ntfs /dev/sdc2)
+## NTFS 
+
+~~~
+root@ubuntu-sv:~# mkfs.fat /dev/sdc2
+Cluster size has been automatically set to 4096 bytes.
+Initializing device with zeroes: 100% - Done.
+Creating NTFS volume structures.
+mkntfs completed successfully. 
+~~~
+
+Damos el formato con el comando de la imagen(mkfs.ntfs /dev/sdc2)
 
 Fat imagen -->Damosel formato con el comando de la imagen(mkfs.fat /dev/sdc3)
 
