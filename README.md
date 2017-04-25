@@ -102,7 +102,7 @@ Por defecto al crear la partición le da formato linux.
 
 
 ## NTFS 
-
+Damos el formato con este comando
 ~~~
 root@ubuntu-sv:~# mkfs.fat /dev/sdc2
 Cluster size has been automatically set to 4096 bytes.
@@ -111,13 +111,43 @@ Creating NTFS volume structures.
 mkntfs completed successfully. 
 ~~~
 
-Damos el formato con el comando de la imagen(mkfs.ntfs /dev/sdc2)
+## Fat 
+Damos el formato con este comando
+~~~
+root@ubuntu-sv:~# mkfs.fat /dev/sdc3
+mkfs.fat 3.0.26(2014-03-07)
+mkfs.fat: Attempting to create a too large filesystem
+~~~
 
-Fat imagen -->Damosel formato con el comando de la imagen(mkfs.fat /dev/sdc3)
+-Si queremos particionar un disco nuevo y formatear sus particiones se utiliza fdisk. 
 
-Para particionar un disco nuevo y formatearlos se utiliza fdisk. Modificar el fichero fstab, añadiendo todas las particiones. Las del disco A se montarán manualmente. Las del disco B se montarán automáticamente al arrancar.
+-Modificamos el fichero fstab, añadiendo todas las particiones. 
 
-imagen
+-Las del disco A se montarán manualmente. Las del disco B se montarán automáticamente al arrancar.
+
+### Editamos el fichero /etc/fstab
+
+Añadiendo esto:
+
+~~~
+/dev/mapper/ubuntu--sv--vg-root /   ext4 errors=remount-ro 0            $
+
+UUID=9b7bba1b-80fe-4b5c-a656-93aeefb08935 / boot      rxt 2 defaults    $  
+/dev/mapper/ubuntu--sv--vg- swap_1 none        swap   sw            0   $
+
+83c6a5e0-ce4b-4b27-9533-7db44bbe9f26  /media/discB1  ext4  noauto  0 0
+
+a8331766-49cc-4b80-a787-789bc43e702f  /media/discB2  fat   noauto  0 0
+
+/dev/sdc1   /media/discC1   ext4    auto    0     0
+
+/dev/sdc2   /media/discC2   ntfs    auto    0     0
+
+/dev/sdc3   /media/discC3   fat     auto    0     0
+
+~~~
+
+
 
 Ejercicios cron.
 
