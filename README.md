@@ -100,7 +100,7 @@ First sector (14000001-20971519, default 14000001):
 
 Por defecto al crear la partición le da formato linux.
 
-~~~
+
 ## NTFS 
 
 ~~~
